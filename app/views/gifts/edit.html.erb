@@ -1,0 +1,40 @@
+<h1>Editing gift</h1>
+
+<% form_for(@gift) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_area :name %>
+  </p>
+  <p>
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :purchased %><br />
+    <%= f.check_box :purchased %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :purchaser_id %><br />
+    <%= f.text_field :purchaser_id %>
+  </p>
+  <p>
+    <%= f.label :purchase_date %><br />
+    <%= f.datetime_select :purchase_date %>
+  </p>
+  <p>
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @gift %> |
+<%= link_to 'Back', gifts_path %>

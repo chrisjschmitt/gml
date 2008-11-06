@@ -1,0 +1,24 @@
+<h1>Editing subscription</h1>
+
+<% form_for(@subscription) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :exchange_id %><br />
+    <%= f.text_field :exchange_id %>
+  </p>
+  <p>
+    <%= f.label :date_joined %><br />
+    <%= f.date_select :date_joined %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @subscription %> |
+<%= link_to 'Back', subscriptions_path %>

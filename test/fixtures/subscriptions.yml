@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_id: 1
+  exchange_id: 1
+  date_joined: 2008-10-02
+
+two:
+  user_id: 1
+  exchange_id: 1
+  date_joined: 2008-10-02

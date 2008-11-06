@@ -1,0 +1,12 @@
+<% accessible_form_for(@exchange) do |f| %>
+  <%= f.error_messages %>
+    <%= f.text_field :name, :size => 30 %>
+    <%= f.text_area :description, :rows => 3, :cols => 30 %>
+		<fieldset class="submit">
+		  <p>
+		    <%= f.submit "Create" %>
+		  </p>
+		</fieldset>
+<% end %>
+
+<%= link_to 'Back', exchanges_path %>

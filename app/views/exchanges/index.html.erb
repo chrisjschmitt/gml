@@ -1,0 +1,22 @@
+<h1>Listing exchanges</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+
+<% for exchange in @exchanges %>
+  <tr>
+    <td><%=h exchange.name %></td>
+    <td><%=h exchange.description %></td>
+    <td><%= link_to 'Show', exchange %></td>
+    <td><%= link_to 'Edit', edit_exchange_path(exchange) %></td>
+    <td><%= link_to 'Destroy', exchange, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New exchange', new_exchange_path %>

@@ -1,0 +1,25 @@
+<% form_for(@gift, :url => {:action => :create}) do |f| %>
+<fieldset>
+	<%= f.error_messages %>
+	<%= f.text_field :name, :size => 30 %>
+	<%= submit_tag "Add this item to my wish list" %>
+</fieldset>
+<% end %>
+
+<div>
+<br />
+<h3><%= @current_user.username %>'s wish list</h3>
+<ul id="gift-list">
+  <% @user.gifts.each do |gift| %>
+  <li id="item_<%= gift.id %>">
+	  <span><%= link_to image_tag("trash.gif"), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+	    <%= gift.name %>
+	  </span>
+  </li>
+  <% end %>
+</ul>                  
+</div>
+
+<%= sortable_element 'gift-list', :url => { :controller => :gifts, :action => "sort" }, :complete => visual_effect(:highlight, 'gift-list')
+%>
+
