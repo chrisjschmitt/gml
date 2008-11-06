@@ -1,6 +1,11 @@
-set :application, "example.com"
-set :project, "jump_off"
-set :user, "deploy"
+set :application, "giftmylist.com"
+set :deploy_to, "/home/cavas/public_html/#{application}"
+#set :project, "jump_off"
+set :user, "cavas"
+set :admin_runner, "cavas"
+
+set :port, 6220
+# stopped configuring here...
 
 default_run_options[:pty] = true
 set :repository,  "git@github.com:ryanlowe/#{project}.git"
