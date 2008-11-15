@@ -13,7 +13,7 @@
   <% @user.gifts.each do |gift| %>
   <li id="item_<%= gift.id %>">
 	  <span><%= link_to image_tag("trash.gif"), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
-	    <%= gift.name %>
+	    <%= white_list(gift.name) %>
 	  </span>
   </li>
   <% end %>

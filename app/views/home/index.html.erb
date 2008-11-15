@@ -1,8 +1,6 @@
 <h1>Routes - Remove after testing</h1>
 <p><%= login_url %></p>
-<p><%= list_url %></p>
-
-It's <%= Time.now %>. 
+ 
 <%= @current_user.username %>, you have <%= pluralize(@gifts, "wish") %> on your list.<br><br>
 <% if @gifts == 0 %>
 	Click on <%= link_to "Manage My List", {:controller => 'gifts', :action => 'index'} %> to get started creating your wish list.<br>

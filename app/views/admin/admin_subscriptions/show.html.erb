@@ -1,0 +1,18 @@
+<p>
+  <b>User:</b>
+  <%=h @subscription.user_id %>
+</p>
+
+<p>
+  <b>Exchange:</b>
+  <%=h @subscription.exchange_id %>
+</p>
+
+<p>
+  <b>Date joined:</b>
+  <%=h @subscription.date_joined %>
+</p>
+
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

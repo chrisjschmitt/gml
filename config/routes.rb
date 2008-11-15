@@ -1,17 +1,24 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :subscriptions
+  map.resources :admin_subscriptions
 
   map.resources :exchanges
+  map.resources :admin_exchanges
 
+  map.resources :gifts
+  map.resources :gifts,
+    :collection => { :sort => :post } # Required for sortable_element
+    
   #gifts
-  map.with_options :controller => "gifts" do |gifts|
-    gifts.connect '/gifts',         :action => 'index'
-    gifts.list    '/list',          :action => 'index'
-    gifts.destroy '/gift/destroy',  :action => 'destroy'    
-    gifts.front   '/gift/show/:id', :action => 'show'
-    gifts.create  '/gift/create',   :action => 'create'
-    gifts.sort    '/gift/sort',     :action => 'sort'
-  end  
+  # map.with_options :controller => "gifts" do |gifts|
+  #   gifts.connect '/gifts',         :action => 'index'
+  #   gifts.list    '/list',          :action => 'index'
+  #   gifts.destroy '/gift/destroy',  :action => 'destroy'    
+  #   gifts.gift    '/gift/edit/:id',  :action => 'edit'
+  #   gifts.show    '/gift/show/:id', :action => 'show'
+  #   gifts.create  '/gift/create',   :action => 'create'
+  #   gifts.sort    '/gift/sort',     :action => 'sort'
+  # end  
 
   #site
   map.with_options :controller => "site" do |site|
@@ -67,7 +74,13 @@ ActionController::Routing::Routes.draw do |map|
   #admin_users
   map.with_options :controller => "admin_users" do |admin_users|
     admin_users.admin_users '/admin/users',    :action => 'list'
+    admin_users.edit        '/admin/user/:id', :action => 'edit'
     admin_users.connect     '/admin/user/:id', :action => 'show'
+  end
+  
+  #admin
+  map.with_options :controller => "admin" do |admin|
+    admin.admin               '/admin/home',    :action => 'home'
   end
 
 end

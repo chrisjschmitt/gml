@@ -12,4 +12,9 @@ class AdminUsersController < ApplicationController
     @title = "User "+@user.username
   end
   
+  # GET /gifts/1/edit
+  def edit
+    @user = User.find(params[:id])
+  end
+  
 end

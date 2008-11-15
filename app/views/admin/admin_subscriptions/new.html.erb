@@ -1,0 +1,12 @@
+<% accessible_form_for(@subscription) do |f| %>
+  <%= f.error_messages %>
+  <%= f.text_field :user_id %>
+  <%= f.text_field :exchange_id %>
+	<fieldset class="submit">
+	  <p>
+	    <%= f.submit "Create" %>
+	  </p>
+	</fieldset>
+<% end %>
+
+<%= link_to 'Back', subscriptions_path %>

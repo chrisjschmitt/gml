@@ -1,6 +1,6 @@
-class ExchangesController < ApplicationController
-  # GET /exchanges
-  # GET /exchanges.xml
+class AdminExchangesController < ApplicationController
+  # GET /admin_exchanges
+  # GET /admin_exchanges.xml
   def index
     @user = current_user
     @exchanges = @user.exchanges.find(:all)
@@ -11,8 +11,8 @@ class ExchangesController < ApplicationController
     end
   end
 
-  # GET /exchanges/1
-  # GET /exchanges/1.xml
+  # GET /admin_exchanges/1
+  # GET /admin_exchanges/1.xml
   def show
     @exchange = Exchange.find(params[:id])
 
@@ -22,8 +22,8 @@ class ExchangesController < ApplicationController
     end
   end
 
-  # GET /exchanges/new
-  # GET /exchanges/new.xml
+  # GET /admin_exchanges/new
+  # GET /admin_exchanges/new.xml
   def new
     @exchange = Exchange.new
     @fieldset_name = "Test1"
@@ -34,13 +34,13 @@ class ExchangesController < ApplicationController
     end
   end
 
-  # GET /exchanges/1/edit
+  # GET /admin_exchanges/1/edit
   def edit
     @exchange = Exchange.find(params[:id])
   end
 
-  # POST /exchanges
-  # POST /exchanges.xml
+  # POST /admin_exchanges
+  # POST /admin_exchanges.xml
   def create
     @exchange = Exchange.new(params[:exchange])
 
@@ -56,8 +56,8 @@ class ExchangesController < ApplicationController
     end
   end
 
-  # PUT /exchanges/1
-  # PUT /exchanges/1.xml
+  # PUT /admin_exchanges/1
+  # PUT /admin_exchanges/1.xml
   def update
     @exchange = Exchange.find(params[:id])
 
@@ -73,8 +73,8 @@ class ExchangesController < ApplicationController
     end
   end
 
-  # DELETE /exchanges/1
-  # DELETE /exchanges/1.xml
+  # DELETE /admin_exchanges/1
+  # DELETE /admin_exchanges/1.xml
   def destroy
     @exchange = Exchange.find(params[:id])
     @exchange.destroy
