@@ -8,11 +8,10 @@
 
 <% for exchange in @exchanges %>
   <tr>
+    <td><%=h exchange.id %></td>
     <td><%=h exchange.name %></td>
     <td><%=h exchange.description %></td>
-    <td><%= link_to 'Show', exchange %></td>
-    <td><%= link_to 'Edit', edit_exchange_path(exchange) %></td>
-    <td><%= link_to 'Destroy', exchange, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'View the members in your gift exchange', :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></td>
   </tr>
 <% end %>
 </table>

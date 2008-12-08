@@ -3,11 +3,21 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :admin_subscriptions
 
   map.resources :exchanges
+  map.with_options :controller => "exchanges" do |site|
+    site.members '/members/:id', :action => 'show_members'
+  end
+  
+  
   map.resources :admin_exchanges
 
   map.resources :gifts
   map.resources :gifts,
     :collection => { :sort => :post } # Required for sortable_element
+  map.with_options :controller => "gifts" do |gift|
+    gift.connect  '/wishlist/:id',      :action => 'show_wishlist'
+    gift.connect  '/purchased/:id',     :action => 'purchased'
+    gift.connect  '/undo_purchase/:id', :action => 'undo_purchase'
+  end
     
   #gifts
   # map.with_options :controller => "gifts" do |gifts|

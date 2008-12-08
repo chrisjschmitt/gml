@@ -1,0 +1,8 @@
+Exchange members: 
+<table>
+<% for member in @members %>
+    <tr>
+    <td><%=h member.username %></td>
+    <td><%= link_to 'View List', :controller => 'gifts', :action => 'show_wishlist', :id => member %></td>
+<% end %>
+</table>

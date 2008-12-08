@@ -26,6 +26,7 @@ class ExchangesController < ApplicationController
   # GET /exchanges/new.xml
   def new
     @exchange = Exchange.new
+    @exchange.users.build
     @fieldset_name = "Test1"
 
     respond_to do |format|
@@ -72,7 +73,12 @@ class ExchangesController < ApplicationController
       end
     end
   end
-
+  
+  def show_members
+    exchange = Exchange.find(params[:id])
+    @members = exchange.users
+  end
+  
   # DELETE /exchanges/1
   # DELETE /exchanges/1.xml
   def destroy

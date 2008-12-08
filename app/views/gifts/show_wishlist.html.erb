@@ -1,0 +1,26 @@
+<p style="color: green"><%= flash[:notice] %></p>
+
+<div>
+<h3><%= @member.username %>'s wish list</h3>
+<% form_tag '/purchased', :method => :put do%>
+  <ul id="gift-list">
+  <% for wish in @wanted_items %>
+    <class id="item_<%= wish.id %>">
+      <%= check_box_tag "gifts_id[]", wish.id%>
+      <%= wish.name %><br>
+    </class>
+  <% end %>
+  </ul><br>
+  <%= submit_tag "Mark checked items as purchased"%>
+<% end %>
+</div><br>
+
+<h3>Wishes can come true!</h3>
+<ul id="gift-list_purchased">
+  <% for gift in @purchased_items %>
+  <class id="item_<%= gift.id %>">
+            <%= image_tag("/images/tick.png") %><%= gift.name %>
+            <%= link_to 'Undo', :action => 'undo_purchase', :id => gift.id %><br>
+  </class>
+  <% end %>
+</ul>                  

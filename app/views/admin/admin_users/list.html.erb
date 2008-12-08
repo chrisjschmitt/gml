@@ -3,12 +3,14 @@
 </p>
 <table class="bordered">
   <tr>
+    <th>User ID</th>
     <th>Username</th>
     <th>Created at</th>
     <th>Email</th>
   </tr>
 <% for user in @users -%>
   <tr>
+		<td><%= user.id %>
     <td><%= admin_link_user(user) %></td>
     <td nowrap><%= format_date(user.created_at,true) %></td>
     <td><%= user.email %></td>
