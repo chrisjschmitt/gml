@@ -74,7 +74,6 @@ class ExchangesController < ApplicationController
     end
   end
   
-  # show members of an exchange except for current_user
   def show_members
     exchange = Exchange.find(params[:id])
     @members = exchange.users
