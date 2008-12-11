@@ -88,25 +88,24 @@ class GiftsController < ApplicationController
   
   def show_wishlist
     @member = User.find(params[:id])
-#    session[:giftee_id] = @person.id
     @wanted_items = @member.gifts.find(:all, :conditions => ["purchased=?", false])
     @purchased_items = @member.gifts.find(:all, :conditions => ["purchased=?", true])
   end
   
   def purchased
     # mark items as purchased and move to below purchased header
-    Gift.update_all(["purchase_date=?", Time.now], :id => params[:gifts_id])
-    Gift.update_all(["purchased=?", true], :id => params[:gifts_id])
-    gift = Gift.find(params[:gifts_id])
-    member = gift.user
-    redirect_to :action => :show_wishlist, :id => member.id    # replace with partial
+    member = Gift.find(params[:gifts_id])[0].user                               # find the user for this gift list
+    Gift.update_all(["purchase_date=?", Time.now],  :id => params[:gifts_id])   # should be able to do next three lines in one statement
+    Gift.update_all(["purchased=?", true],          :id => params[:gifts_id])
+    Gift.update_all(["purchaser_id=?", member.id],  :id => params[:gifts_id])
+    redirect_to :action => :show_wishlist,          :id => member.id
   end
 
   def undo_purchase
-    Gift.update_all(["purchase_date=?", Time.now], :id => params[:id])
-    Gift.update_all(["purchased=?", false], :id => params[:id])
+    Gift.update_all(["purchase_date=?", Time.now],  :id => params[:id])
+    Gift.update_all(["purchased=?", false],         :id => params[:id])
     member = Gift.find(params[:id]).user
-    redirect_to :action => :show_wishlist, :id => member.id     # replace with partial
+    redirect_to :action => :show_wishlist, :id => member.id
   end
 
   # Fancy stuff

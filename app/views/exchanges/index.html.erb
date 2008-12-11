@@ -1,21 +1,10 @@
-<h1>Listing exchanges</h1>
-
+<h1>Select a gift exchange:</h1>
+ 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
 <% for exchange in @exchanges %>
   <tr>
-    <td><%=h exchange.id %></td>
     <td><%=h exchange.name %></td>
-    <td><%=h exchange.description %></td>
-    <td><%= link_to 'View the members in your gift exchange', :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></td>
+    <td><%= link_to 'View gift exchange members', :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New exchange', new_exchange_path %>

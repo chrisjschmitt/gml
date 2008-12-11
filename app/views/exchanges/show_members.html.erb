@@ -1,8 +1,13 @@
-Exchange members: 
+Exchange members:
 <table>
 <% for member in @members %>
+  <% unless member.id == current_user.id %>
     <tr>
     <td><%=h member.username %></td>
     <td><%= link_to 'View List', :controller => 'gifts', :action => 'show_wishlist', :id => member %></td>
+  <% end %>
 <% end %>
 </table>
+ 
+<p></br></p>
+<%= link_to 'Select another gift exchange', exchanges_path %>
