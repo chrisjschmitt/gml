@@ -1,10 +1,11 @@
 <h1>Editing Users</h1>
 
-<% accessible_form_for :user do |f| %>
+<% form_for :user, :url => { :action => :update } do |f| %>
 	<%= f.error_messages %>
 	<%= f.text_field :username, :size => 30 %>
 	<%= f.text_field :type, :size => 30 %>
 	<%= f.text_field :email, :size => 30 %>
+	
 	<fieldset class="submit">
 	  <p>
 	    <%= f.submit "Update" %>

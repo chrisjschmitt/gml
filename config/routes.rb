@@ -83,9 +83,10 @@ ActionController::Routing::Routes.draw do |map|
   
   #admin_users
   map.with_options :controller => "admin_users" do |admin_users|
-    admin_users.admin_users '/admin/users',    :action => 'list'
-    admin_users.edit        '/admin/user/:id', :action => 'edit'
-    admin_users.connect     '/admin/user/:id', :action => 'show'
+    admin_users.admin_users '/admin/users',     :action => 'list'
+    admin_users.edit        '/admin/user/:id',  :action => 'edit'
+    admin_users.update      '/admin/user/:id',  :action => 'update'
+    admin_users.connect     '/admin/user/:id',  :action => 'show'
   end
   
   #admin

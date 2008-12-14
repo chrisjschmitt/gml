@@ -9,8 +9,8 @@ class MessageTest < ActiveSupport::TestCase
   end
   
   def test_fixtures
-    assert messages(:ryanlowe2jonny).valid?
-    assert messages(:jonny2ryanlowe).valid?
+    assert messages(:chris2jonny).valid?
+    assert messages(:jonny2chris).valid?
   end
   
   def test_sender_not_valid
@@ -18,7 +18,7 @@ class MessageTest < ActiveSupport::TestCase
     
     m = Message.new
     m.sent_by = 0
-    m.sent_to = users(:ryanlowe).id
+    m.sent_to = users(:chris).id
     m.body = "Hello!"
     assert !m.valid?
     assert_equal 0, @emails.size
@@ -34,7 +34,7 @@ class MessageTest < ActiveSupport::TestCase
     assert !User.exists?(0)
   
     m = Message.new
-    m.sent_by = users(:ryanlowe).id
+    m.sent_by = users(:chris).id
     m.sent_to = 0
     m.body = "Hello!"
     assert !m.valid?
@@ -52,14 +52,14 @@ class MessageTest < ActiveSupport::TestCase
   
     m = Message.new
     m.in_reply_to = 0
-    m.sent_by = users(:ryanlowe).id
+    m.sent_by = users(:chris).id
     m.sent_to = users(:jonny).id
     m.body = "Hello!"
     assert !m.valid?
     assert_equal 0, @emails.size
     
     #corrected
-    m.in_reply_to = messages(:jonny2ryanlowe).id
+    m.in_reply_to = messages(:jonny2chris).id
     assert m.valid?
     assert m.save
     assert_equal 1, @emails.size
@@ -67,8 +67,8 @@ class MessageTest < ActiveSupport::TestCase
   
   def test_recipient_not_sender
     m = Message.new
-    m.sent_by = users(:ryanlowe).id
-    m.sent_to = users(:ryanlowe).id
+    m.sent_by = users(:chris).id
+    m.sent_to = users(:chris).id
     m.body = "Hello!"
     assert !m.valid?
     assert_equal 0, @emails.size
@@ -81,27 +81,27 @@ class MessageTest < ActiveSupport::TestCase
   end
   
   def test_read?
-    assert !messages(:jonny2ryanlowe).read?
-    messages(:jonny2ryanlowe).read_at = 5.days.ago
-    assert messages(:jonny2ryanlowe).save
-    messages(:jonny2ryanlowe).reload
-    assert messages(:jonny2ryanlowe).read?
+    assert !messages(:jonny2chris).read?
+    messages(:jonny2chris).read_at = 5.days.ago
+    assert messages(:jonny2chris).save
+    messages(:jonny2chris).reload
+    assert messages(:jonny2chris).read?
   end
   
   def test_deleted?
-    assert !messages(:jonny2ryanlowe).deleted?
-    messages(:jonny2ryanlowe).deleted_at = 3.days.ago
-    assert messages(:jonny2ryanlowe).save
-    messages(:jonny2ryanlowe).reload
-    assert messages(:jonny2ryanlowe).deleted?
+    assert !messages(:jonny2chris).deleted?
+    messages(:jonny2chris).deleted_at = 3.days.ago
+    assert messages(:jonny2chris).save
+    messages(:jonny2chris).reload
+    assert messages(:jonny2chris).deleted?
   end
   
   def test_replied?
-    assert !messages(:jonny2ryanlowe).replied?
-    messages(:jonny2ryanlowe).replied_at = 5.days.ago
-    assert messages(:jonny2ryanlowe).save
-    messages(:jonny2ryanlowe).reload
-    assert messages(:jonny2ryanlowe).replied?
+    assert !messages(:jonny2chris).replied?
+    messages(:jonny2chris).replied_at = 5.days.ago
+    assert messages(:jonny2chris).save
+    messages(:jonny2chris).reload
+    assert messages(:jonny2chris).replied?
   end
   
   ### SELF

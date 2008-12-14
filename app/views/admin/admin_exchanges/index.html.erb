@@ -13,7 +13,7 @@
     <td><%=h exchange.name %></td>
     <td><%=h exchange.description %></td>
     <td><%= link_to 'Show', exchange %> |</td>
-    <td><%= link_to 'Edit', edit_exchange_path(exchange) %> |</td>
+    <td><%= link_to 'Edit', edit_admin_exchange_path(exchange) %> |</td>
     <td><%= link_to 'Destroy', exchange, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -21,4 +21,4 @@
 
 <br />
 
-<%= link_to 'New exchange', new_exchange_path %>
+<%= link_to 'New exchange', new_admin_exchange_path %>

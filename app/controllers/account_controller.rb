@@ -16,6 +16,7 @@ class AccountController < ApplicationController
 
   def signup
     @title = "Sign up"
+    @exchanges = current_user.exchanges.find(:all)
     @user = User.new(params[:user])
     return unless request.post?
     @user.save!

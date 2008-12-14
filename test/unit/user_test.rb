@@ -4,10 +4,10 @@ class UserTest < Test::Unit::TestCase
   fixtures :users
   
   def test_fixtures
-    assert users(:ryanlowe).valid?
+    assert users(:chris).valid?
     assert users(:jonny).valid?
     
-    assert  users(:ryanlowe).admin?
+    assert  users(:chris).admin?
     assert !users(:jonny).admin?
   end
 
@@ -47,17 +47,17 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_should_reset_password
-    users(:ryanlowe).update_attributes(:password => 'new password', :password_confirmation => 'new password')
-    assert_equal users(:ryanlowe), User.authenticate('ryanlowe', 'new password')
+    users(:chris).update_attributes(:password => 'new password', :password_confirmation => 'new password')
+    assert_equal users(:chris), User.authenticate('chris', 'new password')
   end
 
   def test_should_not_rehash_password
-    users(:ryanlowe).update_attributes(:username => 'ryanlowe2')
-    assert_equal users(:ryanlowe), User.authenticate('ryanlowe2', 'test')
+    users(:chris).update_attributes(:username => 'chris2')
+    assert_equal users(:chris), User.authenticate('chris2', 'test')
   end
 
   def test_should_authenticate_user
-    assert_equal users(:ryanlowe), User.authenticate('ryanlowe', 'test')
+    assert_equal users(:chris), User.authenticate('chris', 'test')
   end
 
   protected
