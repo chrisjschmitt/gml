@@ -2,6 +2,7 @@ class AdminExchangesController < ApplicationController
   # GET /admin_exchanges
   # GET /admin_exchanges.xml
   def index
+    @title = "Administer"
     @user = current_user
     @exchanges = @user.exchanges.find(:all)
 

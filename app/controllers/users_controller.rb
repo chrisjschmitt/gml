@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
+    @title = "Administer users"
     @users = User.find(:all)
 
     respond_to do |format|

@@ -1,10 +1,9 @@
-<h1>Select a gift exchange:</h1>
+<h1>Select a gift exchange</h1><br />
  
 <table>
 <% for exchange in @exchanges %>
   <tr>
-    <td><%=h exchange.name %></td>
-    <td><%= link_to 'View gift exchange members', :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></td>
+    <td><%= link_to "#{exchange.name}", :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></td>
   </tr>
 <% end %>
 </table>

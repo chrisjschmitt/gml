@@ -93,7 +93,7 @@ ActionController::Routing::Routes.draw do |map|
   
   #admin
   map.with_options :controller => "admin" do |admin|
-    admin.admin               '/admin/home',    :action => 'home'
+    admin.admin               '/admin/admin_exchanges',    :action => 'index'
   end
 
 end

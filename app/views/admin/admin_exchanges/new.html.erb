@@ -1,3 +1,4 @@
+<%= render :partial => 'admin/tabs' %>
 <% accessible_form_for(@exchange) do |f| %>
   <%= f.error_messages %>
     <%= f.text_field :name, :size => 30 %>

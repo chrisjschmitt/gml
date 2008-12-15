@@ -78,8 +78,8 @@ class ExchangesController < ApplicationController
   
   # show members of an exchange except for current_user
   def show_members
-    exchange = Exchange.find(params[:id])
-    @members = exchange.users
+    @exchange = Exchange.find(params[:id])
+    @members = @exchange.users
   end
   
   # DELETE /exchanges/1

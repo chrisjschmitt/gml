@@ -8,7 +8,7 @@ body, div, span, td, input, select {
 /*	font-family:Arial;
 	font-size:10pt;*/
 	font-family: Georgia, 'Lucida Grande', sans-serif;     
-	font-size: small;	 	
+	font-size: medium;	 	
 }	
 
 h1, h2, h3, h4, h5 { margin:0;padding:0; }
@@ -19,7 +19,7 @@ body {
 	font-size: x-small; /* IE5 Win */
 	voice-family: "\"}\"";
 	voice-family: inherit;
-	font-size: small;
+	font-size: medium;
 }
 
 html>body { /* be nice to Opera */
@@ -106,6 +106,10 @@ table.bordered        { border-collapse:collapse; }
 	}
 #content a { color: #006600; }
 
+#check_box {
+	padding-left: 12em;
+}
+
 #footer {
 	background:#006600 none repeat scroll 0%;
 	min-height: 50px;
@@ -135,7 +139,7 @@ fieldset {
     margin: 1.5em 0 0 0;
     padding: 0;
     border: 1px solid #BFBAB0;
-    background-color: #F2EFE9;
+    background-color: #E6E6E6;
 }
 
 legend {
@@ -159,6 +163,8 @@ label {
     margin-right: 1em;
     text-align: right;
 }
+
+
 
 fieldset.submit {
     float: none;

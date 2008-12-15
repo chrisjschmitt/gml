@@ -1,4 +1,5 @@
-Exchange members:
+<h1><%= "#{@exchange.name}" %> gift exchange</h1><br />
+
 <table>
 <% for member in @members %>
   <% unless member.id == current_user.id %>
