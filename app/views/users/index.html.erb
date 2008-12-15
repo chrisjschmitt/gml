@@ -1,18 +1,23 @@
 <h1>Listing users</h1>
 
-<table>
+<p>
+  There are <%= @users.size %> users signed up
+</p>
+<table class="bordered">
   <tr>
+    <th>User ID</th>
+    <th>Username</th>
+    <th>Created at</th>
+    <th>Email</th>
   </tr>
-
-<% for user in @users %>
+<% for user in @users -%>
   <tr>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
+		<td><%= user.id %>
+    <td><%= link_to "#{user.username}", edit_user_path (user) %></td>
+    <td nowrap><%= format_date(user.created_at,true) %></td>
+    <td><%= user.email %></td>
   </tr>
-<% end %>
+<% end -%>
 </table>
-
 <br />
-
-<%= link_to 'New user', new_user_path %>
+<%= link_to 'Add a user', signup_path %>

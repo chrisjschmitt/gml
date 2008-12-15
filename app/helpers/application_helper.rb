@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def accessible_form_for(name, object = nil, options = nil, &proc)
-      concat("<fieldset><legend>New #{name.class}</legend>", proc.binding)
+      concat("<fieldset><legend>#{name.class}</legend>", proc.binding)
       form_for(name, 
                object, 
                (options||{}).merge(:builder => AccessibleFormBuilder), 

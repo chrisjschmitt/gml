@@ -47,6 +47,8 @@ class ExchangesController < ApplicationController
 
     respond_to do |format|
       if @exchange.save
+        subscriptions = current_user.exchanges.collect(&:id) + [@exchange.id]
+        current_user.update_attributes(:exchange_ids => subscriptions)
         flash[:notice] = 'Exchange was successfully created.'
         format.html { redirect_to(@exchange) }
         format.xml  { render :xml => @exchange, :status => :created, :location => @exchange }

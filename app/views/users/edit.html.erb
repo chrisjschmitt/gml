@@ -1,11 +1,25 @@
 <h1>Editing user</h1>
 
-<% form_for(@user) do |f| %>
-  <%= f.error_messages %>
+<% accessible_form_for(@user) do |f| %>
+	<%= f.error_messages %>
+	<%= f.text_field :username, :size => 30 %>
+	<%= f.text_field :type, :size => 30 %>
+	<%= f.text_field :email, :size => 30 %>
+	
+	<!-- User.exchanges/_form.rhtml -->
+	<% for exchange in @exchanges %>
+	<div class="submit">
+	  <%= check_box_tag "user[exchange_ids][]", exchange.id, @user.exchanges.include?(exchange) %>
+	  <%= exchange.name %>
+	</div>
+	<% end %>
 
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+	<fieldset class="submit">
+	  <p>
+	    <%= f.submit "Update" %>
+	  </p>
+	</fieldset>
+
 <% end %>
 
 <%= link_to 'Show', @user %> |
