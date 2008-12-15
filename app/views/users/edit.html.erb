@@ -6,9 +6,8 @@
 	<%= f.text_field :type, :size => 30 %>
 	<%= f.text_field :email, :size => 30 %>
 	
-	<!-- User.exchanges/_form.rhtml -->
 	<% for exchange in @exchanges %>
-	<div class="submit">
+	<div class="check_box">
 	  <%= check_box_tag "user[exchange_ids][]", exchange.id, @user.exchanges.include?(exchange) %>
 	  <%= exchange.name %>
 	</div>

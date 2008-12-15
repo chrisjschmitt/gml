@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
   
 
-  #after_save callback to handle user subscription to exchange_ids
+  # after_save callback to handle user subscription to exchange_ids
   def update_exchanges
     unless exchange_ids.nil?
       self.subscriptions.each do |m|
