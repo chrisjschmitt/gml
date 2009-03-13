@@ -1,6 +1,6 @@
 <%= render :partial => 'admin/tabs' %>
 
-<% accessible_form_for :user do |f| %>
+<% accessible_form_for(@user) do |f| %>
 	<%= f.error_messages %>
 	<%= f.text_field :username, :size => 30 %>
 	<%= f.text_field :type, :size => 30 %>

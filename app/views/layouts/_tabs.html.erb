@@ -1,8 +1,11 @@
 <% if logged_in? -%>
-<div id="tabs">
-  <ul class="collapsed menu">
-    <li class="first"><%= link_to 'My List', gifts_url %></li>
-    <li><%= link_to "Other's Lists", exchanges_url %></li>
-  </ul>
-</div>
+	<div id="menu">
+	 <ul id="nav">
+	  <li class='activelink'><%= link_to 'Wishlist', gifts_url %></li>
+	  <li><a href="#">Shopping list</a></li>
+	  <li><%= link_to "Exchanges", exchanges_url %></li>
+	 </ul>
+	</div>
 <% end -%>
+
+

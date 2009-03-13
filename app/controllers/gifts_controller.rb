@@ -4,7 +4,7 @@ class GiftsController < ApplicationController
   def index
     @user = current_user
     @gift = Gift.new    
-    @gifts = Gift.find(:all)
+    @gifts = @user.gifts.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
