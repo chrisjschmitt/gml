@@ -9,6 +9,7 @@ class GiftsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @gifts }
+      format.json { render :layout => false, :json => @gifts.to_json }
     end
   end
 
@@ -20,6 +21,7 @@ class GiftsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @gift }
+      format.json { render :layout => false, :json => @gift.to_json }
     end
   end
 
@@ -90,6 +92,12 @@ class GiftsController < ApplicationController
     @member = User.find(params[:id])
     @wanted_items = @member.gifts.find(:all, :conditions => ["purchased=?", false])
     @purchased_items = @member.gifts.find(:all, :conditions => ["purchased=?", true])
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @wanted_items }
+      format.json { render :layout => false, :json => @wanted_items.to_json }
+    end
   end
   
   def purchased
@@ -116,7 +124,8 @@ class GiftsController < ApplicationController
     gifts.each do |gift|
      gift.position = params['gift-list'].index(gift.id.to_s) + 1
       gift.save
-   end
+    end
    render :nothing => true
-  end              
+  end
+                
 end

@@ -8,6 +8,7 @@ class ExchangesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @exchanges }
+      format.json { render :layout => false, :json => @exchanges.to_json }
     end
   end
 
@@ -19,6 +20,7 @@ class ExchangesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @exchange }
+      format.json { render :layout => false, :json => @exchange.to_json }
     end
   end
 
