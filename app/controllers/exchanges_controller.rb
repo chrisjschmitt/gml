@@ -81,6 +81,7 @@ class ExchangesController < ApplicationController
   def show_members
     @exchange = Exchange.find(params[:id])
     @members = @exchange.users
+    @exchanges = current_user.exchanges.find(:all)
   end
   
   # DELETE /exchanges/1

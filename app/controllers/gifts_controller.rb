@@ -5,6 +5,7 @@ class GiftsController < ApplicationController
     @user = current_user
     @gift = Gift.new    
     @gifts = @user.gifts.find(:all)
+    @exchanges = @user.exchanges.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -90,6 +91,7 @@ class GiftsController < ApplicationController
   
   def show_wishlist
     @member = User.find(params[:id])
+    @exchanges = current_user.exchanges.find(:all)
     @wanted_items = @member.gifts.find(:all, :conditions => ["purchased=?", false])
     @purchased_items = @member.gifts.find(:all, :conditions => ["purchased=?", true])
     

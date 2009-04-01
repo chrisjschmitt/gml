@@ -32,9 +32,9 @@
 			<div class="box">
 						<h2>Exchanges :</h2>
 						<ul>
-						<li><img src='images/icons/new.png'> <a href>Griswald Family Christmas</a></li>
-						<li><a href>Initech festive exchange</a></li>
-						<li><a href>TGIF Flare Swap</a></li>
+						<% for exchange in @exchanges %>
+							<li><%= link_to "#{exchange.name}", :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></li>
+						<% end %>
 						</ul>
 			</div>
 		  <div class="box">
