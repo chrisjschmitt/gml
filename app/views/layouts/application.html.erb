@@ -29,14 +29,16 @@
 					<i>One of the items is 30% off at Amazon</i></p>
 					<p>You've been assigned Rusty in the Griswald Family Christmas exchange</p>
 			</div>
-			<div class="box">
-						<h2>Exchanges :</h2>
-						<ul>
-						<% for exchange in @exchanges %>
-							<li><%= link_to "#{exchange.name}", :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></li>
+			<% if @exchanges %>
+                <div class="box">
+					<h2>Exchanges :</h2>
+					<ul>
+                        <% for exchange in @exchanges %>
+						    <li><%= link_to "#{exchange.name}", :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></li>
 						<% end %>
-						</ul>
-			</div>
+					</ul>
+                </div>
+            <% end %>
 		  <div class="box">
 				<div style="font-size: 0.8em;">Design by <a href="#">GML ltd.</a></div>
 			</div>

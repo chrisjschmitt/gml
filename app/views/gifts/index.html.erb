@@ -1,7 +1,8 @@
 <% form_for(@gift, :url => {:action => :create}) do |f| %>
 <fieldset>
 	<%= f.error_messages %>
-	<%= f.text_field :name, :size => 30 %>
+    What you wanna get: <%= f.text_field :name, :size => 30 %><br/>    
+    URL (Optional): <%= f.text_field :url, :size => 60 %><br/>
 	<%= submit_tag "Add this item to my wish list" %>
 </fieldset>
 <% end %>
@@ -11,11 +12,15 @@
 <h3><%= @current_user.username %>'s wish list</h3>
 <ul id="gift-list">
   <% @gifts.each do |gift| -%>
-  <li id="item_<%= gift.id -%>">
-	  <span><%= link_to image_tag("trash.gif"), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+    <li id="item_<%= gift.id -%>">
+	  <span>
+        <%= link_to image_tag("trash.gif"), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
 	    <%= white_list(gift.name) %>
-	  </span>
-  </li>
+        <% if gift.url && !gift.url.empty? %>
+          (<%= link_to 'link', gift.url, :target => '_new' %>)
+        <% end %>
+      </span><br/>
+    </li>
   <% end %>
 </ul>                  
 </div>
