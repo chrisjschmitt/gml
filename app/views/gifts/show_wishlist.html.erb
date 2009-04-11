@@ -20,7 +20,7 @@
   <% for gift in @purchased_items %>
   <class id="item_<%= gift.id %>">
             <%= image_tag("/images/tick.png") %><%= gift.name %>
-            <%= link_to 'Undo', :action => 'undo_purchase', :id => gift.id %><br>
+            <%= link_to 'Undo', gift_undo_purchase_url(gift) %><br>
   </class>
   <% end %>
 </ul>                  

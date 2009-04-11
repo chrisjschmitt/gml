@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
     gift.connect  '/wishlist/:id',      :action => 'show_wishlist'
     gift.connect  '/purchased/:id',     :action => 'purchased'
     gift.connect  '/undo_purchase/:id', :action => 'undo_purchase'
+    gift.gift_undo_purchase '/undo_purchase/:id', :action => 'undo_purchase', :method => 'put'
   end
     
   #gifts
