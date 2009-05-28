@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   #home
-  map.with_options :controller => "home" do |home|
+  map.with_options :controller => "gifts" do |home|
     home.home '/home', :action => 'index'
   end
 
