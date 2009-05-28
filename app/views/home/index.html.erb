@@ -1,4 +1,296 @@
-<%= @current_user.username %>, you have <%= pluralize(@gifts, "wish") %> on your list.<br><br>
-<% if @gifts == 0 %>
+<div id='right'>
+<%= @current_user.username %>, you have <%= pluralize(@gifts.count, "wish") %> on your list.<br><br>
+<% if @gifts.count == 0 %>
 	Click on <%= link_to "My List", {:controller => 'gifts', :action => 'index'} %> to get started creating your wish list.<br>
 <% end %>
+<ul id='wishlist'>
+  <% if @gifts.count > 0 %>
+	  <% @gifts.each do |gift| -%>
+	    <li id="item_<%= gift.id -%>" style='list-style: none'>
+	       <span>
+		    <%= white_list(gift.name) %>
+		<% if gift.url && !gift.url.empty? %>
+		  (<%= link_to 'link', gift.url, :target => '_new' %>)
+		<% end %>
+		<%= link_to image_tag("http://www.famfamfam.com/lab/icons/silk/icons/bullet_delete.png", {:border => 0, :align => :absmiddle }), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+<!--
+		<%= link_to image_tag("delete.png", {:border => 0 }), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to image_tag("http://www.famfamfam.com/lab/icons/silk/icons/cross.png", {:border => 0 }), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+-->
+	      </span><br/>
+	    </li>
+	  <% end %>
+  <% end %>
+</ul>  
+<table>
+  <% if @gifts.count > 0 %>
+	  <% @gifts.each do |gift| -%>
+	    <tr id="item_<%= gift.id -%>">
+		  <td>
+		<%= link_to image_tag("trash.gif"), { :controller => :gifts, :action => :destroy, :id => gift.id }, :confirm => 'Are you sure?', :method => :delete %>
+		    <%= white_list(gift.name) %>
+		<% if gift.url && !gift.url.empty? %>
+		  <br>&nbsp;&nbsp;&nbsp;&nbsp;(<%= link_to gift.url, gift.url, :target => '_new' %>)
+		<% end %>
+	      </td>
+	    </tr>
+	  <% end %>
+  <% end %>
+</table>
+</div>		
+<div id="left" style='float: right; visibility: hidden'>
+	<div class="box">
+		<h2>News :</h2>	
+		<p>Sandy has added 4 items to her wish list<br />
+		<i>One of the items is 30% off at Amazon</i></p>
+		<p>You've been assigned Rusty in the Griswald Family Christmas exchange</p>
+	</div>
+	<% if @exchanges %>
+		<div class="box">
+			<h2>Exchanges :</h2>
+			<ul>
+			<% for exchange in @exchanges %>
+				<li><%= link_to "#{exchange.name}", :controller => 'exchanges', :action => 'show_members', :id => exchange.id %></li>
+			<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<div class="box">
+		<div style="font-size: 0.8em;">Design by <a href="#">GML ltd.</a></div>
+	</div>
+</div>
+			
+
+<div style='float:right' style='width: 200px; vertical-align: top;'>
+	<input type='button' id='add_item_control' onClick='item_form_show(); return false;' value='Add an item'>
+	<!--<a href='#' id='add_item_control' onClick='item_form_show(); return false;'>Add an item</a>-->
+	<!-- <form id='item_form' style='display: none;' >-->
+<!--
+	<% form_for :gifts, @gift, :url =>  {:controller => 'gifts', :action => 'new' }, :html => { 'id' => 'item_form', :style => 'display: none' } do |f| %>
+		<label>New Item: </label><br /> <%= f.text_field :name, :autocomplete => 'off' %> <br /><br />
+		<label>Url: </label><br /> <%= f.text_field :url, :autocomplete => 'off' %>   <br /><br />
+		<label>Description </label><br /><textarea id='description' name='description'></textarea><br /><br />
+		<input id='item_form_btn' type='submit' value='Add item' onClick='item_add_another(); return false;'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='item_form_hide(); return false'>I'm done</a>
+	<% end %>
+-->
+	<form id='item_form' action="<%= url_for :controller => :gifts, :action => :create, :format => :json %>" style='display: none' method='POST'>
+		<input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
+		<label>New Item: </label><br /> <%= text_field_tag 'gift[name]', nil, :autocomplete => 'off'  %><!--<input id='item' name='item'>--> <br /><br />
+		<label>Url: </label>     <br /> <%= text_field_tag 'gift[url]' , nil, :autocomplete => 'off'  %> <!-- <input id='url' name='url' autocomplete='off'> --> <br /><br />
+		<!-- <label>Description </label><br /><%= text_area_tag 'gifts[description]' %><br /><br /> -->
+		<!--
+		<input id='item_form_btn' type='submit' value='Add item' onClick='item_add_another(); return false;'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='item_form_hide(); return false'>I'm done</a>
+-->
+		<input id='item_form_btn' name='commit' type='submit' value='Add item'>&nbsp;&nbsp;&nbsp;<a href='#' onClick='item_form_hide(); return false'>I'm done</a>
+	</form>
+</div>
+<!--
+<ul id='wishlist'>
+
+	<li>Leather Gloves  <span class='item-control'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class='item-control-edit' title='Edit this item'>Edit</span>&nbsp;&nbsp;&nbsp;<span class='item-control-delete' title='Delete this item'>Delete</span></span><br />
+	<i>Preferably black.</i>
+	</li>
+	<li>Pea Coat 		<span class='item-control'> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class='item-control-edit' title='Edit this item'>Edit</span>&nbsp;&nbsp;&nbsp;<span class='item-control-delete' title='Delete this item'>Delete</span></span></li>
+
+</ul>
+-->
+	<script>
+		var GML = {};
+		GML.list_item = function ( opts ){
+			this.id       = opts.id;
+			this.item     = opts.item;
+			this.url      = opts.url;
+			this.desc     = opts.desc;
+			this.position = opts.position;
+		};
+
+		GML.wish_list = function ( opts ){
+
+			/* items */
+			this._items        = {};
+			
+			this.items        = function (){
+				var _items = [];
+				for ( var id in this._items ){
+					_items.push( this._items[ id ] );
+				}
+
+				_items.sort(by_position);
+				return _items;
+			}
+
+			this.add_item = function ( item ){
+				this._items[ item.id ] = item;
+			}
+
+			this.delete_item = function ( item_id ){
+				delete this._items[ item_id ]; 	
+			}
+			
+			/* observers */
+			this._observers   = {};
+			this.add_observer = function ( name, fn ){
+				this._observers[name] = fun; 
+			}
+
+			this.delete_observer = function ( name ){
+				delete this._observers[name];
+			}
+			this.notify_observers = function (entity, action){
+				for ( var name in this._observers ){
+					this._observers[name](entity,action,this); 
+				}
+			}
+
+			/* helper functions */
+			function by_position(a,b) {
+				return a.position - b.position;
+			}
+		};
+			function item_form_show () {
+				$j('#add_item_control').hide();
+				$j('#item_form').show();
+				$j('#item').focus();
+			}
+			function item_form_reset () {
+				$j('#item').val("");	
+				$j('#url').val("");
+				$j('#description').val("");
+				$j('#item').focus();
+			}
+
+			function item_form_cancel () {
+				$j('#item_form').hide();
+				item_form_reset();
+			}
+			function item_form_hide () {
+				$j('#item_form').hide('slow');
+				$j('#add_item_control').show();
+			}
+		/*
+		var PAGE = {};
+
+		PAGE.item_form = function () {
+			
+			this.show = function () {
+				$j('#add_item_control').hide();
+				$j('#item_form').show();
+				$j('#item').focus();
+			}
+			
+			this.hide = function () {
+				$j('#item_form').hide('slow');
+				$j('#add_item_control').show();
+			}
+			
+			this.reset = function () {
+				$j('#item').val("");	
+				$j('#url').val("");
+				$j('#description').val("");
+				$j('#item').focus();
+			}
+
+
+			this.cancel = function () {
+				this.hide();
+				this.reset();
+			}
+
+			this.fill_in = function ( item ) {
+				$j('#item').val( item.item );
+				$j('#description').val( item.desc );
+				$j('#position').val( item.position );
+				$j('#url').val( item.url );
+				$j('#id').val( item.id );
+			}
+		}
+	*/	
+		function item_add(){
+			var html = item_format( $j('#item').val(), $j('#url').val(), $j('#description').val());
+			
+			$j(html).appendTo('#wishlist');
+			setup_controls();
+			// ajax call goes here
+			item_form_hide();
+			item_form_reset();
+			
+		}
+		
+		function item_delete ( control_el ) {
+			 if( confirm('Delete?') ){ 
+			 	$j(control_el).parents('li').remove(); 
+			 	//ajax call goes here
+			 }
+			 return false;
+		}
+		
+		function item_format (item, url, desc){
+			var html = '<li>' + item + " <span class='item-control'><span class='item-control-edit' title='Edit this item'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit</span><span class='item-control-delete' title='Delete this item'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete</span></span>";
+			if ( desc != undefined && desc != '' ){
+				html = html + '<br><i>' + desc + '</li>';
+			}
+			
+			html = html + "</li>";
+			
+			return html;
+		}
+		function item_edit (control_el){
+			
+			var list_item  = $j(control_el).parents('li')[0];
+			list_item = $j(list_item).html();
+			
+			var item_re = /^([^<]+)</;
+			var item_rv = list_item.match( item_re );
+			
+			var desc_re = /i>([^<]+)</;
+			var desc_rv = list_item.match( desc_re );
+			
+			var item       = item_rv[1];
+			var desc       = desc_rv != undefined ? desc_rv[1] : '';
+			
+			item_form_reset();
+			$j('#item').val( rtrim( item ) );
+			$j('#description').val( rtrim( desc ) );
+			// change frm to have an Update button instead of an add button
+			// make update button replace existing entry (requires id?)
+			item_form_show();
+		}
+		function item_add_another(){
+			var html = item_format( $j('#item').val(), $j('#url').val(), $j('#description').val());
+			
+			$j(html).appendTo('#wishlist');
+			setup_controls();
+			// ajax call goes here
+			
+			// ajax success callback must call this
+			item_form_reset();
+			this.form.submit();
+		}
+
+		
+		function show_item_controls ( num ){
+			$j('#item-control-' + num).show();
+		}
+		
+		function setup_controls (){
+			$j('#wishlist > li').hover(	
+					function () { $j(this).find('.item-control').show() },
+					function () { $j(this).find('.item-control').hide() }
+				);
+			
+			$j('.item-control-delete').bind('click',  function(){ item_delete(this); return false } );
+			$j('.item-control-edit').bind('click',  function(){ item_edit(this); return false } );
+		}
+		
+		$j(document).ready(function(){
+			setup_controls();
+		});
+		
+		function rtrim(str, chars) {
+    		chars = chars || "\\s";
+    		return str.replace(new RegExp("[" + chars + "]+$j", "g"), "");
+		}
+		
+		
+	</script>
+

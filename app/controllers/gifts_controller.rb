@@ -53,7 +53,9 @@ class GiftsController < ApplicationController
         flash[:notice] = 'Gift idea was successfully added.'
         format.html { redirect_to :action => :index }
         format.xml  { render :xml => @gift, :status => :created, :location => @gift }
+	format.json { render :json => @gift.to_json, :status => :created }
       else
+	format.json { render :json => @gift.to_json }
         format.html { render :action => "new" }
         format.xml  { render :xml => @gift.errors, :status => :unprocessable_entity }
       end
