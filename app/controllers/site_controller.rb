@@ -7,6 +7,9 @@ class SiteController < ApplicationController
   end
 
   def front
+	if logged_in?
+		redirect_to :controller => :gifts, :status => 303
+	end
   end
 
 end

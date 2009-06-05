@@ -4,7 +4,7 @@ class GiftsController < ApplicationController
   def index
     @user = current_user
     @gift = Gift.new    
-    @gifts = @user.gifts.find(:all)
+    @gifts = @user.gifts
     @exchanges = @user.exchanges.find(:all)
 
     respond_to do |format|
@@ -51,7 +51,8 @@ class GiftsController < ApplicationController
     respond_to do |format|
       if @gift.save
         flash[:notice] = 'Gift idea was successfully added.'
-        format.html { redirect_to :action => :index }
+        #format.html { redirect_to :action => :index }
+        format.html { render :partial => 'gift', :locals => { :gift => @gift } }
         format.xml  { render :xml => @gift, :status => :created, :location => @gift }
 	format.json { render :json => @gift.to_json, :status => :created }
       else
@@ -90,7 +91,7 @@ class GiftsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def show_wishlist
     @member = User.find(params[:id])
     @exchanges = current_user.exchanges.find(:all)

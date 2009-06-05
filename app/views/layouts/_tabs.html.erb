@@ -1,9 +1,8 @@
-<% if logged_in? -%>
+<% if logged_in? and @controller.controller_name != 'site' -%>
 	<div id="menu">
 	 <ul id="nav">
-	  <li class='activelink'><%= link_to 'Wishlist', gifts_url %></li>
-	  <!-- <li><a href="#">Shopping list</a></li> -->
-	  <li><%= link_to "Exchanges", exchanges_url %></li>
+	  <li class='<%= @controller.controller_name != 'exchanges' ? 'activelink' : '' %>'><%= link_to 'Wishlist', gifts_url %></li>
+	  <li class='<%= @controller.controller_name == 'exchanges' ? 'activelink' : '' %>'><%= link_to "Exchanges", exchanges_url %></li>
 	 </ul>
 	</div>
 <% end -%>
