@@ -1,0 +1,12 @@
+	    <li id="item_<%= gift.id -%>" style='list-style: none'>
+		
+	       <span>
+		    <%= white_list(gift.name) %>
+		<% if gift.url && !gift.url.empty? %>
+		  (<%= link_to 'link', gift.url, :target => '_new' %>)
+		<% end %>
+		<a href='#' onclick='item_delete("<%= gift.id %>"); return false;'><%= image_tag("http://www.famfamfam.com/lab/icons/silk/icons/bullet_delete.png", {:border => 0, :align => :absmiddle }) %></a> 
+
+	      </span><br/>
+	    </li>
+
