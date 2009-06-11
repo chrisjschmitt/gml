@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   include Clearance::User
   
   # GML specific validations
-  validates_presence_of     :username
-  validates_length_of       :username, :within => 3..40
+#  validates_presence_of     :username
+#  validates_length_of       :username, :within => 3..40
   
   has_many :gifts, :order => :position
   has_many :subscriptions
