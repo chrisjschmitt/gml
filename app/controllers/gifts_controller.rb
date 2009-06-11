@@ -54,9 +54,9 @@ class GiftsController < ApplicationController
         #format.html { redirect_to :action => :index }
         format.html { render :partial => 'gift', :locals => { :gift => @gift } }
         format.xml  { render :xml => @gift, :status => :created, :location => @gift }
-	format.json { render :json => @gift.to_json, :status => :created }
+	      format.json { render :json => @gift.to_json, :status => :created }
       else
-	format.json { render :json => @gift.to_json }
+	      format.json { render :json => @gift.to_json }
         format.html { render :action => "new" }
         format.xml  { render :xml => @gift.errors, :status => :unprocessable_entity }
       end

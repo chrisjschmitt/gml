@@ -1,0 +1,1 @@
+6/3/09	- 	Set up new app structure using Rails 2.3.2 Clearance as Rails engine auth system - Cucumber tests passing

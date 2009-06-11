@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
+
+  map.resources :admin_users
 
   map.resources :subscriptions
   map.resources :admin_subscriptions
@@ -21,32 +22,13 @@ ActionController::Routing::Routes.draw do |map|
     gift.connect  '/undo_purchase/:id', :action => 'undo_purchase'
     gift.gift_undo_purchase '/undo_purchase/:id', :action => 'undo_purchase', :method => 'put'
   end
-    
-  #gifts
-  # map.with_options :controller => "gifts" do |gifts|
-  #   gifts.connect '/gifts',         :action => 'index'
-  #   gifts.list    '/list',          :action => 'index'
-  #   gifts.destroy '/gift/destroy',  :action => 'destroy'    
-  #   gifts.gift    '/gift/edit/:id',  :action => 'edit'
-  #   gifts.show    '/gift/show/:id', :action => 'show'
-  #   gifts.create  '/gift/create',   :action => 'create'
-  #   gifts.sort    '/gift/sort',     :action => 'sort'
-  # end  
 
   #site
   map.with_options :controller => "site" do |site|
     site.connect '/boom', :action => 'boom'
     site.front   '/',     :action => 'front'
   end
-  
-  #account
-  map.with_options :controller => "account" do |account|
-    account.connect '/account', :action => 'index'
-    account.login   '/login',   :action => 'login'
-    account.signup  '/signup',  :action => 'signup'
-    account.logout  '/logout',  :action => 'logout'
-  end
-  
+
   #settings
   map.with_options :controller => "settings" do |settings|
     settings.preferences     '/settings/preferences',        :action => 'preferences'
@@ -60,41 +42,6 @@ ActionController::Routing::Routes.draw do |map|
     home.home '/home', :action => 'index'
   end
 
-  #messages
-  map.with_options :controller => "messages" do |messages|
-    messages.inbox   '/inbox',                  :action => 'inbox'
-    messages.outbox  '/outbox',                 :action => 'outbox'
-    messages.trash   '/trash',                  :action => 'trash'
-    messages.connect '/incoming/:id',           :action => 'incoming'
-    messages.connect '/outgoing/:id',           :action => 'outgoing'
-    messages.connect '/send/message/to/:id',    :action => 'new'
-    messages.connect '/reply/to/message/:id',   :action => 'reply'
-    messages.connect '/create/message/to/:id',  :action => 'create'
-    messages.connect '/destroy/incoming/:id',   :action => 'destroy'
-    messages.connect '/undestroy/incoming/:id', :action => 'undestroy'
-  end
-  
-  ### PUBLIC AREAS
-  
-  #profile
-  map.with_options :controller => "profile" do |profile|
-    profile.connect '/person/:username', :action => 'user'
-    profile.people  '/people',           :action => 'list'
-  end
-  
-  ### ADMIN
-  
-  #admin_users
-  map.with_options :controller => "admin_users" do |admin_users|
-    admin_users.admin_users '/admin/users',     :action => 'list'
-    admin_users.edit        '/admin/user/:id',  :action => 'edit'
-    admin_users.update      '/admin/user/:id',  :action => 'update'
-    admin_users.connect     '/admin/user/:id',  :action => 'show'
-  end
-  
-  #admin
-  map.with_options :controller => "admin" do |admin|
-    admin.admin               '/admin/admin_exchanges',    :action => 'index'
-  end
+  map.root :controller => '/home', :action => 'index'
 
 end

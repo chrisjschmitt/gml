@@ -1,0 +1,17 @@
+<%= render :partial => 'admin/tabs' %>
+<p>There are <%= @users.size %> users signed up</p>
+<table class="bordered">
+  <tr>
+    <th>User ID</th>
+    <th>Username</th>
+    <th>Email</th>
+  </tr>
+<% for user in @users -%>
+  <tr>
+		<td><%= user.id %>
+    <td><%= link_to "#{user.username}", edit_user_path (user) %></td>
+    <td><%= user.email %></td>
+  </tr>
+<% end -%>
+</table>
+<br />

@@ -1,0 +1,119 @@
+Installation steps for gml with Clearance, Cucumber and rSpec
+
+Create a new Rails project and switch to that directory
+
+	rails app-name
+	cd app-name
+
+In config/environment.rb:
+
+config.gem "thoughtbot-clearance", 
+  :lib     => 'clearance', 
+  :source  => 'http://gems.github.com', 
+  :version => '0.6.6'
+config.gem 'rspec', 
+  :version => '1.2.6', 
+  :lib => false
+config.gem 'rspec-rails', 
+  :version => '1.2.6', 
+  :lib => false
+
+Vendor the gem:
+
+	rake gems:install
+	rake gems:unpack
+	
+Run "rake gems:refresh_specs" and Check that each frozen gem has a specification file:
+	$ ls -l vendor/gems/*/.specification
+
+Make sure the development database exists and run the generator:
+
+	script/generate clearance
+
+A number of files will be created and instructions will be printed.
+
+You may already have some of these files. Don’t worry. You’ll be asked if you want to overwrite them.
+
+Run the migration:
+
+	rake db:migrate
+
+Environment
+
+Define a HOST constant near the top of your environment files.
+In config/environments/test.rb and config/environments/development.rb it can be:
+
+	HOST = "localhost"
+
+In production.rb it must be the actual host your application is deployed to:
+
+	HOST = "kwikwish.com"
+	
+The constant is used by mailers to generate URLs in emails.
+
+In config/environment.rb:
+
+	# For Thought-bot Clearance
+	DO_NOT_REPLY = "donotreplyexample.com"
+
+Delete the default routes and define root_url in your config/routes.rb:
+
+	map.root :controller => 'home'
+
+As your app evolves, you want to know that authentication still works. Clearance’s opinion is that you should test its integration with your app using Cucumber.
+
+In config/environments/test.rb:
+
+	config.gem 'webrat',
+	  :version => '= 0.4.4'
+	config.gem 'cucumber',
+	  :version => '= 0.3.0'
+	config.gem 'thoughtbot-factory_girl',
+	  :lib     => 'factory_girl',
+	  :source  => "http://gems.github.com", 
+	  :version => '1.2.1'
+
+Vendor the gems:
+
+	sudo rake gems:install RAILS_ENV=test
+	sudo rake gems:unpack  RAILS_ENV=test
+
+Don’t vendor nokogiri (due to its native extensions):
+
+	rm -rf vendor/gems/nokogiri-1.2.3
+
+Run the Cucumber generator (if you haven’t already) and Clearance’s feature generator:
+
+	script/generate cucumber
+	script/generate clearance_features
+
+I had to install rspec and rspec-rails as a system wide gem otherwise I get an error that I'm missing these gems:
+
+	sudo gem install rspec-rails
+	
+Note that rspec is a dependency of rspec-rails so you don't have to install it specifically.
+
+If you get the error message "config.gem: Unpacked gem ... in vendor/gems has no specification file. Run 'rake gems:refresh_specs' to fix this." do this:
+
+	sudo rake gems:refresh_specs RAILS_ENV=test
+	
+Making the Cucumber tests pass:
+
+Prepare the test database:
+
+	Rake db:test:prepare
+	
+Set up a application layout file in apps/view/layouts that has a least the following:
+
+	<% unless flash[:notice].to_s.length < 1 -%>
+	
+Create a HomeController
+
+	script/generate controller home
+	
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 <div id='right'>
-<%= @current_user.username %>, you have <%= pluralize(@gifts.count, "wish") %> on your list.<br><br>
+<%= @user.username %>, you have <%= pluralize(@gifts.count, "wish") %> on your list.<br><br>
 <ul id='wishlist'>
   <% if @gifts.count > 0 %>
 	   <%= render :partial => 'gift', :collection => @gifts %>

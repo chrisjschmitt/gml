@@ -24,8 +24,8 @@
 			<% unless @omit_h1 -%>
    			<h1><%=h @title %></h1>
 			<% end -%>
+			<%= display_flash_message %>
 			<%= yield %>
-	</div>
 
 </body>
 </html>

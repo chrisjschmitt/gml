@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090410160534) do
+ActiveRecord::Schema.define(:version => 20090610220714) do
 
   create_table "exchanges", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20090410160534) do
 
   create_table "gifts", :force => true do |t|
     t.string   "name"
+    t.string   "url"
     t.integer  "quantity"
     t.boolean  "purchased",     :default => false
     t.integer  "user_id"
@@ -28,20 +29,6 @@ ActiveRecord::Schema.define(:version => 20090410160534) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
-  end
-
-  create_table "messages", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
-    t.integer  "sent_by"
-    t.integer  "sent_to"
-    t.datetime "replied_at"
-    t.integer  "in_reply_to"
-    t.string   "subject"
-    t.text     "body"
-    t.datetime "read_at"
   end
 
   create_table "preference_stores", :force => true do |t|
@@ -50,16 +37,6 @@ ActiveRecord::Schema.define(:version => 20090410160534) do
     t.integer  "user_id"
     t.boolean  "notify_new_message", :default => true
   end
-
-  create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "user_id"
@@ -70,13 +47,18 @@ ActiveRecord::Schema.define(:version => 20090410160534) do
   end
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "type"
-    t.string   "username"
     t.string   "email"
-    t.string   "crypted_password", :limit => 40
-    t.string   "salt",             :limit => 40
+    t.string   "encrypted_password", :limit => 128
+    t.string   "salt",               :limit => 128
+    t.string   "token",              :limit => 128
+    t.datetime "token_expires_at"
+    t.boolean  "email_confirmed",                   :default => false, :null => false
+    t.string   "username"
+    t.string   "type"
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["id", "token"], :name => "index_users_on_id_and_token"
+  add_index "users", ["token"], :name => "index_users_on_token"
 
 end
