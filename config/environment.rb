@@ -52,5 +52,8 @@ Rails::Initializer.run do |config|
   config.gem 'rspec-rails', 
     :version => '1.2.6', 
     :lib => false
+  config.gem "openrain-action_mailer_tls", 
+    :lib => "smtp_tls.rb", 
+    :source => "http://gems.github.com"
     
 end

@@ -20,7 +20,6 @@
 		<%= render :partial => 'layouts/tabs' %>
 	</div>		
 	<div id="content">
-			<%= render :partial => 'layouts/flash', :locals => { :flash => flash } %>
 			<% unless @omit_h1 -%>
    			<h1><%=h @title %></h1>
 			<% end -%>

@@ -9,6 +9,8 @@ class SiteController < ApplicationController
   def front
 	if signed_in?
 		redirect_to :controller => :gifts, :status => 303
+	else
+	  redirect_to new_session_url
 	end
   end
 
