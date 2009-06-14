@@ -20,11 +20,11 @@ class AdminUsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-
     respond_to do |format|
-      if @User.update_attributes(params[:user])
+      @user.exchange_ids = params[:user][:exchange_ids] ||= [] # Sets up user subscriptions
+      if @user.update_attributes(params[:user])
         flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
+        format.html { redirect_to :action => "index" }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
