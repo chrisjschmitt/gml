@@ -19,7 +19,6 @@ class Clearance::UsersController < ApplicationController
                     "It contains instructions for confirming your account.")
       redirect_to url_after_create
     else
-       flash[:notice] = "Testing"
       render :template => 'users/new'
     end
   end

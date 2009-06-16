@@ -48,8 +48,10 @@ class ExchangesController < ApplicationController
     # Save exchange and subscribe current_user to newly created exchange
     respond_to do |format|
       if @exchange.save
-        subscriptions = current_user.exchanges.collect(&:id) + [@exchange.id]
-        current_user.update_attributes(:exchange_ids => subscriptions)
+        Subscription.create(:user_id => current_user.id, :exchange_id => @exchange.id)
+#        subscriptions = current_user.exchanges.collect(&:id) + [@exchange.id]
+#        current_user.exchange_ids = params[:user][:exchange_ids] ||= [] # Sets up user subscriptions
+#        current_user.update_attributes(:exchange_ids => subscriptions)
         flash[:notice] = 'Exchange was successfully created.'
         format.html { redirect_to(@exchange) }
         format.xml  { render :xml => @exchange, :status => :created, :location => @exchange }
