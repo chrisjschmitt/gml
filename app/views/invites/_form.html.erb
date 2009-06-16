@@ -1,0 +1,17 @@
+<%= error_messages_for :exchange %>
+
+<% form_for @exchange do |f| -%>
+  <p>
+	  <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <div id="emails">
+    <%= render :partial => 'email', :collection => @exchange.users %>
+  </div>
+  <p>
+    <%= add_email_link "Invite another" %>
+  </p>
+  <p>
+    <%= f.submit "Submit" %>
+  </p>
+<% end -%>

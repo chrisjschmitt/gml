@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.resources :admin_users
-
   map.resources :subscriptions
   map.resources :admin_subscriptions
+  map.resources :invites
 
   map.resources :exchanges
   map.with_options :controller => "exchanges" do |site|

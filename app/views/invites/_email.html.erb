@@ -1,0 +1,12 @@
+<div class="email">
+<% new_or_existing = email.new_record? ? 'new' : 'existing' %>
+<% prefix = "exchange[#{new_or_existing}_email_attributes][]" %>
+
+<% fields_for prefix, email do |email_form| -%>
+  <p>
+	  <%= email_form.label :email %>
+    <%= email_form.text_field :email %>
+    <%= link_to_function "remove", "$(this).up('.email').remove()" %>
+  </p>
+<% end -%>
+</div>
