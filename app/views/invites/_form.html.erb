@@ -1,12 +1,12 @@
 <%= error_messages_for :exchange %>
 
-<% form_for @exchange do |f| -%>
+<% form_for @exchange, :url => create_or_update_invites_url do |f| -%>
   <p>
 	  <%= f.label :name %>
     <%= f.text_field :name %>
   </p>
   <div id="emails">
-    <%= render :partial => 'email', :collection => @exchange.users %>
+    <%= render :partial => 'user', :collection => @exchange.users %>
   </div>
   <p>
     <%= add_email_link "Invite another" %>

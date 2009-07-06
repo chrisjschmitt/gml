@@ -1,0 +1,11 @@
+<table class="bordered">
+  <tr>
+    <th>Select a gift exchange to view invitation status</th>
+  </tr>
+<% for exchange in @exchanges -%>
+  <tr>
+    <td><%= link_to "#{exchange.name}", invite_path(exchange) %></td>
+  </tr>
+<% end -%>
+</table>
+<br />

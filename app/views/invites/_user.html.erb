@@ -1,0 +1,19 @@
+<div class="email">
+<% new_or_existing = user.new_record? ? 'new' : 'existing' %>
+<% prefix = "exchange[#{new_or_existing}_email_attributes][]" %>
+
+<% fields_for prefix, user do |email_form| -%>
+  <p>
+	  <%= email_form.label :email %>
+    <%= email_form.text_field :email %>
+		<div class="password_field">
+		  <%= email_form.label :password %>
+		  <%= email_form.password_field :password %>
+		</div>
+		<div class="password_field">
+		  <%= email_form.label :password_confirmation, "Confirm password" %>
+		  <%= email_form.password_field :password_confirmation %>
+    <%= link_to_function "remove", "$(this).up('.email').remove()" %>
+  </p>
+<% end -%>
+</div>

@@ -1,1 +1,12 @@
-6/3/09	- 	Set up new app structure using Rails 2.3.2 Clearance as Rails engine auth system - Cucumber tests passing
+7/3/09
+	-	Emails sent to invited members; 
+	-	Got the Cucumber test working for creating an exchange (fails at submit);
+	- Update exchange working
+	
+7/2/09
+	-	Created invites controller with actions to create a gift exchange, invite members, 
+		view current users gift exchanges, and view member invitation status 
+	-	very crude and Cucumber tests don't work right yet) - see TODO list
+
+6/3/09
+	- Set up new app structure using Rails 2.3.2 Clearance as Rails engine auth system - Cucumber tests passing

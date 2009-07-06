@@ -1,0 +1,9 @@
+Invites controller
+- make sure email invitations are being sent with each new user added to an exchange
+- modify the update action to allow current_user to add or remove gift exchange members only (can't change email addresses)
+- change "email_attributes" to "member_attributes" to be more clear - rerun tests
+- eliminate the need for a password for each member being invited
+- Add invitation action to clearance_mailer.rb
+- Add Cucumber tests for adding and removing members to an existing gift exchange
+- Fix the "Invite Another" button (getting rjs error)
+- Fix links to create, update and view invitations

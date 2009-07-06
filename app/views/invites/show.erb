@@ -1,0 +1,17 @@
+<p>
+  There are <%= @exchange_users.size %> users in your gift exchange
+</p>
+<table class="bordered">
+  <tr>
+    <th>User ID</th>
+    <th>User email</th>
+    <th>Status of invitation</th>
+  </tr>
+<% for user in @exchange_users -%>
+  <tr>
+		<td><%= user.id %>
+    <td><%= user.email %></td>
+    <td><%= user.email_confirmed %></td>
+  </tr>
+<% end -%>
+</table>
